@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FormController;
+use App\Http\Controllers\homeController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\ChangeReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [homeController::class, 'homeRender'])->name('home');
+Route::resource("reserve", FormController::class);
+Route::get("reservation/{code}", [ReservationController::class, 'show']);
+Route::get('edit/{code}', [ChangeReservationController::class, 'editFormResnder']);
